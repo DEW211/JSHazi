@@ -1,0 +1,90 @@
+JS Házi3 MW plan
+
+boltok és készletük
+
+-index.html - login--
+-inventory.html - összes áru gomb a boltokra--
+-inventoryChange.html - áru módosítás--
+-newInventory.html - új áru--
+-newStoreForm.html - új bolt--
+-storeChange.html - bolt módosítás--
+-storeinventory.html - egy bolt készlete--
+-stores.html - boltok nézet--
+
+routing 
+
+renderMW
+
+middleware/auth/
+	chechPassMW.js
+	authMW.js
+
+middleware/inventory/
+	getInventory.js
+
+middleware/store/
+	getStoresMW.js
+	getStoreMW
+	saveStoreMW
+	delStoreMW
+	getStoreInventoryMW
+	saveStoreInventoryMW
+	deleteItemFromInventoryMW
+
+
+
+GET, POST/ - főoldal -post esetén jelszó ellenőrzés, ha jó akkor redirect az inventory oldalra. egyébként login redirect(index.html)
+	getInventoryMW
+	chechPassMW
+	render(index.html)
+
+GET /inventory - összes áru tábla
+	autMW
+	getInventoryMW
+	renderMW(inventory.html)
+
+Store műveletek
+GET /store/view/ -összes bolt tábla
+	authMW
+	getStoresMW
+	renderMW(stores.html)
+
+GET /store/view/:storeid?
+	autMW
+	getStoreInventoryMW
+	renderMW(storeinventory.html)
+
+GET, POST /store/new
+	authMW
+	saveStoreMW
+	renderMW(newStoreForm.html)
+
+GET, POST /store/edit/:storeid
+	autMW
+	getStoreMW
+	saveStoreMW
+	renderMW(storeChange.html)
+
+GET /store/delete/:storeid
+	authMW
+	getStoreMW
+	delStoreMW
+	renderMW(stores.html)
+
+Áruműveletek
+GET, POST /store/newitem/:storeid
+	authMW
+	saveStoreInventoryMW
+	renderMW(newInventory.html)
+
+GET, POST/store/edititem/:storeid/:itemid
+	authMW
+	getStoreInventoryMW
+	saveStoreInventoryMW
+	renderMW(inventoryChange.html)
+
+GET /store/deleteitem/:storeid/:itemid
+	authMW
+	getStoreInventoryMW
+	deleteItemFromInventoryMW
+	renderMW(storeInventory)

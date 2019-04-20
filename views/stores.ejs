@@ -1,0 +1,53 @@
+<% include header%>
+<div class="container">
+<div class="row">
+        <div class="col">
+            <h2>Boltok</h2>
+        </div>
+    </div>
+<div class="row">
+<div class="col">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Cím</th>
+                <th scope="col">Nyitvatartás</th>
+                <th scope="col">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <!--
+                    <a href="storeinventory.html" role="button" class="btn btn-link">cím1</a>-->
+                <td scope="row"><a href="/store/view/:storeid">cím1</a></td>
+                <td scope="row">nyitva1</td>
+                <td scope="row" align="right">
+                    <!--valamiért összenyonja a szép font awesome képeket, a storeinventory.html-ben meg nem. Majd egyszercsak magoldom. Addig marad a szöveg-->
+                        <a class="btn btn-primary" role="button" href="/store/edit/:storeid">módosít</a>
+                        <a class="btn btn-danger" role="button" href="/store/delete/:storeid">törlés</a>
+                </td>  
+            </tr>
+            <tr>
+                <td scope="row"><a href="storeinventory.html">cím2</a></td>
+                <td scope="row">nyitva2</td>
+                <td scope="row" align="right">
+                         <!--valamiért összenyonja a szép font awesome képeket, a storeinventory.html-ben meg nem. Majd egyszercsak magoldom. Addig marad a szöveg-->
+                         <a class="btn btn-primary" role="button" href="storeChange.html">módosít</a>
+                         <a class="btn btn-danger" role="button" href="#">törlés</a>
+                </td>                            
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+<div class="row">
+<!--gomb-->
+<div class="col">
+    <a href="/inventory" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Összes
+        áru</a>
+    <a href="/store/new" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Új bolt</a>
+</div>
+</div>
+
+</div>
+<% include footer %>
