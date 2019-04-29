@@ -6,6 +6,9 @@
 
  module.exports = function (objectrepository){
     return function (req, res, next){
-        next();
+        if(typeof req.session.sessionid === 'undefined'){
+            res.redirect('/');
+        }
+        return next();
     };
  };
