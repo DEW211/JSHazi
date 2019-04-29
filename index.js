@@ -4,7 +4,7 @@ let app = express();
 let session = require('express-session');
 let bodyParser = require('body-parser');
 
-//app.use(express.static('static'));
+app.use(express.static('static'));
 app.set('view engine', 'ejs');
 
 //sessions
