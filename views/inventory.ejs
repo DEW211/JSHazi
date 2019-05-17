@@ -17,18 +17,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td scope="row">név1</td>
-                            <td scope="row">mennyiség1</td>
-                            <td scope="row">ár1</td>
-                            <td scope="row">holvan1</td>
-                        </tr>
-                        <tr>
-                            <td scope="row">név2</td>
-                            <td scope="row">mennyiség2</td>
-                            <td scope="row">ár2</td>
-                            <td scope="row">holvan2</td>
-                        </tr>
+                    <% aru.forEach(function(egyAru){ %>
+                    <tr>
+                        <td>
+                            <%= egyAru.name %>
+                        </td>
+                        <td>
+                            <%= egyAru.count %>
+                        </td>
+                        <td>
+                            <%= egyAru.unitPrice %>
+                        </td>
+                        <td>
+                            <a href="/store/edititem/<%= egyAru._stockAddr %>/<%= egyAru._id%>" class="btn  btn-primary"><i
+                                        class="far fa-edit"></i></a>
+                            <a href="/store/deleteItem/<%= egyAru._stockAddr%>/<%= egyAru._id%>" class="btn btn-danger"><i
+                                        class="far fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                    <% }); %>
                     </tbody>
                 </table>
             </div>

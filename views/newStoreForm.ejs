@@ -3,21 +3,23 @@
         <div class="row">
             <div class="col-4"></div>
             <div class="col-4">
-                <h2>Új bolt felvétele</h2>
-                <form>
+                <h2>Bolt</h2>
+                <form method="POST">
                     <div class="form-group">
-                        <label for="InputNewStoreAddr">Új bolt címe</label>
-                        <input type="text" class="form-control" id="InputNewStoreAddr" placeholder="cím">
+                        <label for="InputNewStoreAddr">Cím</label>
+                        <input type="text" class="form-control" id="inputAddr" placeholder="cím" name="address"
+                        value="<%= (typeof bolt === 'undefined') ? '' : bolt.address %>">
                     </div>
                     <div class="form-group">
-                            <label for="InputNewOpen">Új bolt nyitvatartása</label>
-                            <input type="text" class="form-control" id="InputNewOpen" placeholder="nyitvatartás">
+                            <label for="InputNewOpen">Nyitvatartása</label>
+                            <input type="text" class="form-control" id="inputOpen" placeholder="nyitvatartás" name="open"
+                            value="<%= (typeof bolt === 'undefined') ? '' : bolt.open %>">
                         </div>
                         <hr class="mb-4">
-                        <a href="stores.html" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Módist</a>
-                        <a href="stores.html" class="btn btn-danger btn-lg active" role="button" aria-pressed="true">Mégse</a>
+                        <input type="submit" class="btn btn-primary btn-lg active" value="Mentés"/>
+                        <a href="/store/view" class="btn btn-danger btn-lg active" role="button">Mégse</a>
                 </form>
             </div>
             <div class="col-4"></div>
         </div>
-        <% include footer %>
+<% include footer %>

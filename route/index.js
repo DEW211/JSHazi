@@ -1,23 +1,27 @@
 const renderMW = require('../middleware/renderMW');
-const checkPassMW = require('../middleware/auth/authMW');
+const checkPassMW = require('../middleware/auth/checkPassMW');
 const getInventoryMW = require('../middleware/inventory/getInventory');
 const authMW = require('../middleware/auth/authMW');
 const getStoresMW = require('../middleware/store/getStores');
-const getStoreMW = require('../middleware/store/saveStore');
+const getStoreMW = require('../middleware/store/getStore');
 const saveStoreMW = require('../middleware/store/saveStore');
-const deltSoreMW = require('../middleware/store/delStore');
+const deleteSoreMW = require('../middleware/store/delStore');
 const getStoreInventoryMW = require('../middleware/store/getStoreInventory');
 const saveStoreInventoryMW = require('../middleware/store/saveStoreInventory');
 const delItemFromInventorMW = require('../middleware/store/delItemFromInventory');
+const getItemMW = require('../middleware/store/getItem')
+
+const BoltModel = require('../models/inventory');
+const AruModel = require('../models/item')
 
 module.exports = function(app){
-    const objRepo = {};
+    const objRepo = {
+        BoltModel : BoltModel,
+        AruModel : AruModel
+    };
 
-    app.get('/',
-    getInventoryMW(objRepo),
-    checkPassMW(objRepo),
-    renderMW(objRepo, 'index'));
-
+    
+   //#region 
     app.get('/inventory',
     authMW(objRepo),
     getInventoryMW(objRepo),
@@ -37,33 +41,45 @@ module.exports = function(app){
     authMW(objRepo),
     saveStoreMW(objRepo),
     renderMW(objRepo, 'newStoreForm'));
-//kell még egy MW, a módosítás gombra. Kiszedi a formból, mait kell és utána módost DB-ben, utána stores view redirect /store/updateStore maybe, POST
+
     app.use('/store/edit/:storeid',
     authMW(objRepo),
     getStoreMW(objRepo),
     saveStoreMW(objRepo),
-    renderMW(objRepo, 'storeChange'));
-
+    renderMW(objRepo, 'newStoreForm'));
+    
     app.get('/store/delete/:storeid',
     authMW(objRepo),
     getStoreMW(objRepo),
-    deltSoreMW(objRepo),
+    deleteSoreMW(objRepo),
     renderMW(objRepo, 'newStoreForm'));
-
+    //#endregion
+    
+    //új áru
     app.use('/store/newitem/:storeid',
     authMW(objRepo),
     saveStoreInventoryMW(objRepo),
     renderMW(objRepo, 'inventoryChange'));
-//kell egy MW, a módosítás gombra. Kiszedi a formból a dolgokat és módosít DB-ben, utána store view(inventory) /store/updateItem POST
+
+    //áru modositas
     app.use('/store/edititem/:storeid/:itemid',
     authMW(objRepo),
-    getStoreInventoryMW(objRepo),
+    getItemMW(objRepo),
     saveStoreInventoryMW(objRepo),
     renderMW(objRepo, 'inventoryChange'));
 
+    //aru torles
     app.get('/store/deleteItem/:storeid/:itemid',
     authMW(objRepo),
-    getStoreInventoryMW(objRepo),
+    getItemMW(objRepo),
     delItemFromInventorMW(objRepo),
+    getStoreInventoryMW(objRepo),
     renderMW(objRepo, 'storeInventory'));
+
+
+
+    app.use('/',
+    getInventoryMW(objRepo),
+    checkPassMW(objRepo),
+    renderMW(objRepo, 'index'));
 }

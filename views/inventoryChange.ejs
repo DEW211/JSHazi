@@ -3,24 +3,27 @@
 <div class="row">
     <div class="col-4"></div>
     <div class="col-4">
-        <h2>Új áru felvétele</h2>
-        <form>
+        <h2>Áru</h2>
+        <form method="POST">
             <div class="form-group">
-                <label for="InputNewItemName">Új név</label>
-                <input type="text" class="form-control" id="InputNewItemName" placeholder="megnevezés">
+                <label for="InputNewItemName">Név</label>
+                <input type="text" class="form-control" id="name" placeholder="megnevezés" name="name"
+                value="<%= (typeof aru === 'undefined') ? '' : aru.name %>">
             </div>
             <div class="form-group">
-                <label for="InputNewItemCount">Új mennyiség</label>
-                <input type="text" class="form-control" id="InputNewItemCount" placeholder="mennyiség">
+                <label for="InputNewItemCount">Mennyiség</label>
+                <input type="text" class="form-control" id="count" placeholder="mennyiség" name="count"
+                value="<%= (typeof aru === 'undefined') ? '' : aru.count %>">
             </div>
             <div class="form-group">
-                <label for="InputNewPlace">Új cím</label>
-                <input type="text" class="form-control" id="InputNewPlace" placeholder="cím">
+                <label for="InputNewItemCount">Egységár</label>
+                <input type="text" class="form-control" id="unitPrize" placeholder="mennyiség" name="unitPrice"
+                value="<%= (typeof aru === 'undefined') ? '' : aru.unitPrice %>">
             </div>
             <hr class="mb-4">
-            <a href="storeinventory.html" class="btn btn-primary btn-lg active" role="button"
-                aria-pressed="true">Módist</a>
-            <a href="storeinventory.html" class="btn btn-danger btn-lg active" role="button"
+            <input type="submit"  class="btn btn-primary btn-lg active" 
+                aria-pressed="true" value="Mentés"/>
+            <a href="/store/view/<%= boltid %>" class="btn btn-danger btn-lg active" 
                 aria-pressed="true">Mégse</a>
         </form>
     </div>

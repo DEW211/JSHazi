@@ -5,7 +5,19 @@
 const requireOption = require('../requireOption');
 
 module.exports = function (objectrepository) {
+    
     return function (req, res, next) {
-        next();
+        console.log("deleitemMW");
+        if(typeof res.locals.aru === 'undefined'){
+            return next();
+        }
+
+        res.locals.aru.remove( err => {
+            if(err){
+                return next(err);
+            }
+
+            return res.redirect('/store/view/' + req.params.storeid);
+        })
     };
 };

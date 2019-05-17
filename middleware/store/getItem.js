@@ -1,25 +1,21 @@
 /**
- * gets the whole inventory from the db
+ * loads an item from a store, both ids are in the URL
  */
 
 const requireOption = require('../requireOption');
 
 module.exports = function (objectrepository) {
-    const aruModel = requireOption(objectrepository, 'AruModel');
+    const AruModel = requireOption(objectrepository, 'AruModel');
 
-    console.log('getInventoryMW');
     return function (req, res, next) {
-        aruModel.find({}, (err, aru) => {
+        console.log("getItemMW");
+        AruModel.findOne({_stockAddr: req.params.storeid }, (err, aru) =>{
             if(err){
                 return next(err);
             }
-
+            console.log("getItemMW2");
             res.locals.aru = aru;
-            if(typeof res.locals.aru === 'undefined'){
-                res.locals.aru = [];
-            }
             return next();
         });
-
     };
 };

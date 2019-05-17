@@ -1,17 +1,22 @@
-<% include header %>
+<%- include('header') -%>
 <div class="container">
     <div class="row">
-        <div class="col-4"></div>
         <div class="col-4">
-            <h1>Login</h1>
-            <form>
+        
+        </div>
+        <div class="col-4">
+            <h2>Login</h2>
+            <% if (typeof error !== 'undefined') { %>
+                <div class="alert alert-danger"><%= error %></div>
+            <% } %>
+            <form method="POST">
                 <div class="form-group">
-                    <label for="InputPassword">Password</label>
-                    <input type="password" class="form-control" id="InputPassword" placeholder="Enter password">
-                    <hr class="mb-4">
-                    <a href="/inventory" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Login</a>
+                    <label for="pass">Password</label>
+                    <input type="password" class="form-control" id="pass" name="password">
+                </div>
+                <input type="submit" class="btn btn-primary" value="Login"/>
             </form>
         </div>
-        <div class="col-4"></div>
     </div>
-<% include footer %>
+</div>
+<%- include('footer') -%>

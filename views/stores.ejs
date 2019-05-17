@@ -16,26 +16,23 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <!--
-                    <a href="storeinventory.html" role="button" class="btn btn-link">cím1</a>-->
-                <td scope="row"><a href="/store/view/:storeid">cím1</a></td>
-                <td scope="row">nyitva1</td>
-                <td scope="row" align="right">
-                    <!--valamiért összenyonja a szép font awesome képeket, a storeinventory.html-ben meg nem. Majd egyszercsak magoldom. Addig marad a szöveg-->
-                        <a class="btn btn-primary" role="button" href="/store/edit/:storeid">módosít</a>
-                        <a class="btn btn-danger" role="button" href="/store/delete/:storeid">törlés</a>
-                </td>  
-            </tr>
-            <tr>
-                <td scope="row"><a href="storeinventory.html">cím2</a></td>
-                <td scope="row">nyitva2</td>
-                <td scope="row" align="right">
-                         <!--valamiért összenyonja a szép font awesome képeket, a storeinventory.html-ben meg nem. Majd egyszercsak magoldom. Addig marad a szöveg-->
-                         <a class="btn btn-primary" role="button" href="storeChange.html">módosít</a>
-                         <a class="btn btn-danger" role="button" href="#">törlés</a>
-                </td>                            
-            </tr>
+            <% boltok.forEach(function(egyBolt){ %>
+                <tr>
+                    <td>
+                        <a href="view/<%= egyBolt._id%>"><%= egyBolt.address%></a>
+                    </td>
+                    <td>
+                        <%= egyBolt.open %>
+                    </td>
+                    
+                    <td >
+                        <a href="/store/edit/<%= egyBolt._id%>" class="btn btn-sm btn-primary"><i
+                                    class="far fa-edit"></i></a>
+                        <a href="/store/delete/<%= egyBolt._id%>" class="btn btn-sm btn-danger"><i
+                                    class="far fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            <% }); %>
         </tbody>
     </table>
 </div>

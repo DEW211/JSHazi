@@ -7,9 +7,10 @@
  module.exports = function (objectrepository){
     return function (req, res, next){
         console.log('authMW');
-        if(typeof req.session.sessionid === 'undefined'){
-            res.redirect('/');
+        if (typeof req.session.logged === 'undefined' || req.session.logged !== true) {
+            console.log("redirect");
+            return res.redirect('/');
         }
-        return next();
+        next();
     };
  };
