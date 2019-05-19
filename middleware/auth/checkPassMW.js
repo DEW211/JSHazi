@@ -6,14 +6,13 @@ const requireOption = require('../requireOption');
  */
 module.exports = function (objectrepository) {
     return function (req, res, next) {
-        console.log('checkPassMW');
         if(typeof req.body.password === 'undefined'){
             return next();
         }
         //pw check
         if(req.body.password === 'asd'){
             req.session.logged = true;
-            console.log("pass checking");
+            
             return req.session.save(err => res.redirect('/inventory'));
         }
         

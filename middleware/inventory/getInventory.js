@@ -7,7 +7,7 @@ const requireOption = require('../requireOption');
 module.exports = function (objectrepository) {
     const aruModel = requireOption(objectrepository, 'AruModel');
 
-    console.log('getInventoryMW');
+    
     return function (req, res, next) {
         aruModel.find({}, (err, aru) => {
             if(err){
